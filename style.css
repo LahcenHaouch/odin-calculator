@@ -79,42 +79,43 @@ h6 {
   isolation: isolate;
 }
 
-
 /*
-    Custum css
+    Custom css
 */
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #151515;
+  color: #fff;
 }
 
 h1 {
-    margin-bottom: 24px;
+  margin-bottom: 24px;
 }
 
 #calculator-container {
-    display: flex;
-    gap :8px;
-    padding: 24px;
-    border: solid;
-    border-color: hotpink;
+  display: flex;
+  gap: 8px;
+  padding: 24px;
+  border: solid;
+  border-color: #3a3a3c;
 }
 
 #numbers-container {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 8px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
 }
 
 #operations-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .row {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 8px;
 }
