@@ -93,15 +93,28 @@ body {
 }
 
 h1 {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
+}
+
+.container {
+    padding: 24px;
+    border: solid;
+    border-color: #3a3a3c;
+}
+
+#calculator-display {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    color: black;
+    height: 24px;
+    background-color: white;
+    margin-bottom: 8px;
 }
 
 #calculator-container {
   display: flex;
   gap: 8px;
-  padding: 24px;
-  border: solid;
-  border-color: #3a3a3c;
 }
 
 #numbers-container {
@@ -118,4 +131,13 @@ h1 {
 .row {
   display: flex;
   gap: 8px;
+}
+
+.cell {
+    width: 24px;
+    height: 24px;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

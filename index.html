@@ -1,42 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>Calculator</title>
     <script defer src="./index.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <h1>Calculator</h1>
-    <div id="calculator-display"></div>
-    <div id="calculator-container">
-      <div id="numbers-container">
-        <div class="row">
-          <button class="btn-number">1</button>
-          <button class="btn-number">2</button>
-          <button class="btn-number">3</button>
+    <div class="container">
+        <div id="calculator-display">Hello</div>
+        <div id="calculator-container">
+            <div id="numbers-container">
+                <div class="row">
+                    <button class="cell">1</button>
+                    <button class="cell"">2</button>
+                <button class=" cell">3</button>
+                </div>
+                <div class="row">
+                    <button class="cell">4</button>
+                    <button class="cell"">5</button>
+                <button class=" cell">6</button>
+                </div>
+                <div class="row">
+                    <button class="cell">7</button>
+                    <button class="cell"">8</button>
+                <button class=" cell">9</button>
+                </div>
+            </div>
+            <div id="operations-container">
+                <button class="cell">+</button>
+                <button class="cell">-</button>
+                <button class="cell">/</button>
+                <button class="cell">*</button>
+                <button class="cell">=</button>
+
+            </div>
         </div>
-        <div class="row">
-          <button class="btn-number">4</button>
-          <button class="btn-number">5</button>
-          <button class="btn-number">6</button>
-        </div>
-        <div class="row">
-          <button class="btn-number">7</button>
-          <button class="btn-number">8</button>
-          <button class="btn-number">9</button>
-        </div>
-      </div>
-      <div id="operations-container">
-        <button>+</button>
-        <button>-</button>
-        <button>/</button>
-        <button>*</button>
-        <button>=</button>
-      </div>
     </div>
-  </body>
+</body>
+
 </html>
