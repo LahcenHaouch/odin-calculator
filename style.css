@@ -96,10 +96,11 @@ h1 {
   margin-bottom: 16px;
 }
 
-.container {
-    padding: 24px;
+#calculator-container {
+    padding: 16px;
     border: solid;
     border-color: #3a3a3c;
+    border-radius: 16px;
 }
 
 #calculator-display {
@@ -112,12 +113,7 @@ h1 {
     margin-bottom: 8px;
 }
 
-#calculator-container {
-  display: flex;
-  gap: 8px;
-}
-
-#numbers-container {
+#buttons-container {
   display: flex;
   flex-direction: column;
   gap: 8px;
