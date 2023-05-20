@@ -108,9 +108,10 @@ h1 {
     align-items: center;
     padding: 4px;
     color: black;
-    height: 24px;
+    height: 56px;
     background-color: white;
     margin-bottom: 8px;
+    font-size: 1.5rem;
 }
 
 #buttons-container {
@@ -125,8 +126,8 @@ h1 {
 }
 
 .cell {
-    width: 24px;
-    height: 24px;
+    width: 56px;
+    height: 56px;
     padding: 16px;
     display: flex;
     justify-content: center;
