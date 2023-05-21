@@ -88,14 +88,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #151515;
-  color: #fff;
 }
 
 .container {
     max-width: 960px;
-    padding: 16px;
-    margin-inline: 16px;
+    padding-inline: 16px;
+    margin-inline: auto;
 }
 
 h1 {
@@ -103,7 +101,13 @@ h1 {
   margin-bottom: 16px;
 }
 
+button {
+    background-color: oklch(0.31 0.02 232.3);
+    color: oklch(0.65 0.02 209.44);
+}
+
 #calculator-container {
+    background-color: oklch(0.8 0.17 79.49);
     padding: 16px;
     border: solid;
     border-color: #3a3a3c;
@@ -111,12 +115,12 @@ h1 {
 }
 
 #calculator-display {
+    background-color: oklch(0.2 0.01 0);
+    color: white;
     display: flex;
     align-items: center;
     padding: 4px;
-    color: black;
     height: 56px;
-    background-color: white;
     margin-bottom: 8px;
     font-size: 1.5rem;
 }
@@ -139,4 +143,5 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 50%;
 }
