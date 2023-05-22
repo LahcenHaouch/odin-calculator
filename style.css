@@ -101,10 +101,6 @@ h1 {
   margin-bottom: 16px;
 }
 
-button {
-    background-color: oklch(0.31 0.02 232.3);
-    color: oklch(0.65 0.02 209.44);
-}
 
 #calculator-container {
     background-color: oklch(0.8 0.17 79.49);
@@ -119,7 +115,7 @@ button {
     color: white;
     display: flex;
     align-items: center;
-    padding: 4px;
+    padding: 16px;
     height: 56px;
     margin-bottom: 8px;
     font-size: 1.5rem;
@@ -144,4 +140,12 @@ button {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+}
+
+.operator {
+    background-color: oklch(0.6 0.11 183.38);
+}
+
+.float {
+    background-color: oklch(0.48 0.16 271.41);
 }

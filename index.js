@@ -3,7 +3,7 @@ const result = [];
 const numberElements = document.querySelectorAll(".num");
 const calculatorDisplayElement = document.querySelector("#calculator-display");
 
-const operationsElements = document.querySelectorAll('.operation');
+const operationsElements = document.querySelectorAll('.operator');
 
 numberElements.forEach(num => {
   num.addEventListener('click', () => {
@@ -21,8 +21,8 @@ numberElements.forEach(num => {
       result[lastElementIndex] += num.textContent;
     }
     displayResult();
-  })
-})
+  });
+});
 
 operationsElements.forEach(operation => {
   operation.addEventListener('click', () => {
@@ -40,8 +40,8 @@ operationsElements.forEach(operation => {
       result.push(operationToAdd);
     }
     displayResult();
-  })
-})
+  });
+});
 
 
 function displayResult() {
