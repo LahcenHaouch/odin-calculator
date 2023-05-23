@@ -1,9 +1,24 @@
-const result = [];
+const operation = [];
 
-const numberElements = document.querySelectorAll(".num");
+function add(firstNumber, secondNumber) {
+  return firstNumber + secondNumber;
+}
+
+function substract(firstNumber, secondNumber) {
+  return firstNumber - secondNumber;
+}
+
+function multiply(firstNumber, secondNumber) {
+  return firstNumber * secondNumber;
+}
+
+function divide(firstNumber, secondNumber) {
+  return firstNumber / secondNumber;
+}
+
 const calculatorDisplayElement = document.querySelector("#calculator-display");
-
-const operationsElements = document.querySelectorAll('.operator');
+const numberElements = document.querySelectorAll(".num");
+const operatorsElements = document.querySelectorAll('.operator');
 
 numberElements.forEach(num => {
   num.addEventListener('click', () => {
@@ -15,7 +30,7 @@ numberElements.forEach(num => {
       return;
     }
 
-    if (result[lastElementIndex]?.operation) {
+    if (result[lastElementIndex]?.operator) {
       result.push(num.textContent);
     } else {
       result[lastElementIndex] += num.textContent;
@@ -24,20 +39,20 @@ numberElements.forEach(num => {
   });
 });
 
-operationsElements.forEach(operation => {
-  operation.addEventListener('click', () => {
+operatorsElements.forEach(operator => {
+  operator.addEventListener('click', () => {
     const lastElementIndex = result.length - 1;
 
     if (lastElementIndex < 0) {
       return;
     }
 
-    const operationToAdd = { operation: operation.textContent };
+    const operatorToAdd = { operator: operator.textContent };
 
-    if (result[lastElementIndex]?.operation) {
-      result[lastElementIndex] = operationToAdd;
+    if (result[lastElementIndex]?.operator) {
+      result[lastElementIndex] = operatorToAdd;
     } else {
-      result.push(operationToAdd);
+      result.push(operatorToAdd);
     }
     displayResult();
   });
@@ -46,8 +61,8 @@ operationsElements.forEach(operation => {
 
 function displayResult() {
   calculatorDisplayElement.textContent = result.map(element => {
-    if (element.operation) {
-      return element.operation;
+    if (element.operator) {
+      return element.operator;
     }
     return element;
   }).join('');
