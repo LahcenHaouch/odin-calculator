@@ -16,6 +16,26 @@ function divide(firstNumber, secondNumber) {
   return firstNumber / secondNumber;
 }
 
+function operate(firstNumber, operator, secondNumber) {
+  switch (operator) {
+    case '+': {
+      return add(firstNumber, secondNumber);
+    }
+    case '-': {
+      return substract(firstNumber, secondNumber);
+    }
+    case '×': {
+      return multiply(firstNumber, secondNumber);
+    }
+    case '÷': {
+      return divide(firstNumber, secondNumber);
+    }
+    default: {
+      throw new Error(`Unrecognized operator: ${operator}`);
+    }
+  }
+}
+
 const calculatorDisplayElement = document.querySelector("#calculator-display");
 const numberElements = document.querySelectorAll(".num");
 const operatorsElements = document.querySelectorAll('.operator');
