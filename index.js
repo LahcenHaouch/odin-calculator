@@ -39,6 +39,7 @@ function operate(firstNumber, operator, secondNumber) {
 const calculatorDisplayElement = document.querySelector("#calculator-display");
 const numberElements = document.querySelectorAll(".num");
 const operatorsElements = document.querySelectorAll('.operator');
+const floatElement = document.querySelector('.float');
 
 numberElements.forEach(num => {
   num.addEventListener('click', () => {
