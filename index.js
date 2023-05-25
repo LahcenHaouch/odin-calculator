@@ -1,4 +1,13 @@
-const operation = [];
+const operation = {
+  firstOperand: 0,
+  operator: null,
+  secondOperand: null,
+}
+
+const calculatorDisplayElement = document.querySelector("#calculator-display");
+const numberElements = document.querySelectorAll(".num");
+const operatorsElements = document.querySelectorAll('.operator');
+const floatElement = document.querySelector('.float');
 
 function add(firstNumber, secondNumber) {
   return firstNumber + secondNumber;
@@ -16,7 +25,13 @@ function divide(firstNumber, secondNumber) {
   return firstNumber / secondNumber;
 }
 
-function operate(firstNumber, operator, secondNumber) {
+function operate(operation) {
+  const { firstNumber, operator, secondNumber } = operation;
+
+  if (!operator || !secondNumber) {
+    return firstNumber;
+  }
+
   switch (operator) {
     case '+': {
       return add(firstNumber, secondNumber);
@@ -36,27 +51,24 @@ function operate(firstNumber, operator, secondNumber) {
   }
 }
 
-const calculatorDisplayElement = document.querySelector("#calculator-display");
-const numberElements = document.querySelectorAll(".num");
-const operatorsElements = document.querySelectorAll('.operator');
-const floatElement = document.querySelector('.float');
+function displayResult(operationResult) {
+  calculatorDisplayElement.textContent = operationResult;
+}
+
+displayResult(operation.firstOperand);
+
 
 numberElements.forEach(num => {
   num.addEventListener('click', () => {
-    const lastElementIndex = result.length - 1;
 
-    if (lastElementIndex < 0) {
-      result.push(num.textContent);
-      displayResult();
-      return;
-    }
-
-    if (result[lastElementIndex]?.operator) {
-      result.push(num.textContent);
+    if (!operation.secondOperand) {
+      operation.firstOperand += num.textContent;
     } else {
-      result[lastElementIndex] += num.textContent;
+      operation.secondOperand += num.textContent;
     }
-    displayResult();
+
+    console.log(operate(operation))
+    displayResult(operate(operation));
   });
 });
 
@@ -78,13 +90,3 @@ operatorsElements.forEach(operator => {
     displayResult();
   });
 });
-
-
-function displayResult() {
-  calculatorDisplayElement.textContent = result.map(element => {
-    if (element.operator) {
-      return element.operator;
-    }
-    return element;
-  }).join('');
-}
