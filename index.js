@@ -1,5 +1,5 @@
 const operation = {
-  firstOperand: 0,
+  firstOperand: '0',
   operator: null,
   secondOperand: null,
 }
@@ -9,41 +9,45 @@ const numberElements = document.querySelectorAll(".num");
 const operatorsElements = document.querySelectorAll('.operator');
 const floatElement = document.querySelector('.float');
 
-function add(firstNumber, secondNumber) {
-  return firstNumber + secondNumber;
+function add(firstOperand, secondOperator) {
+  return firstOperand + secondOperator;
 }
 
-function substract(firstNumber, secondNumber) {
-  return firstNumber - secondNumber;
+function substract(firstOperand, secondOperator) {
+  return firstOperand - secondOperator;
 }
 
-function multiply(firstNumber, secondNumber) {
-  return firstNumber * secondNumber;
+function multiply(firstOperand, secondOperator) {
+  return firstOperand * secondOperator;
 }
 
-function divide(firstNumber, secondNumber) {
-  return firstNumber / secondNumber;
+function divide(firstOperand, secondOperator) {
+  return firstOperand / secondOperator;
 }
 
 function operate(operation) {
-  const { firstNumber, operator, secondNumber } = operation;
+  const { firstOperand, operator, setcondOperand } = operation;
 
-  if (!operator || !secondNumber) {
-    return firstNumber;
+
+  if (!operator || !secondOperator) {
+    return firstOperand;
   }
+
+  const parsedFirstOperand = Number.parseFloat(firstOperand);
+  const parseSecondOperand = Number.parseFloat(setcondOperand);
 
   switch (operator) {
     case '+': {
-      return add(firstNumber, secondNumber);
+      return add(parsedFirstOperand, parseSecondOperand);
     }
     case '-': {
-      return substract(firstNumber, secondNumber);
+      return substract(parsedFirstOperand, parseSecondOperand);
     }
     case '×': {
-      return multiply(firstNumber, secondNumber);
+      return multiply(parsedFirstOperand, parseSecondOperand);
     }
     case '÷': {
-      return divide(firstNumber, secondNumber);
+      return divide(parsedFirstOperand, parseSecondOperand);
     }
     default: {
       throw new Error(`Unrecognized operator: ${operator}`);
@@ -60,14 +64,24 @@ displayResult(operation.firstOperand);
 
 numberElements.forEach(num => {
   num.addEventListener('click', () => {
+    const newNum = num.textContent;
 
     if (!operation.secondOperand) {
-      operation.firstOperand += num.textContent;
+
+      if (operation.firstOperand === '0') {
+        operation.firstOperand = newNum;
+      } else {
+        operation.firstOperand += newNum;
+      }
     } else {
-      operation.secondOperand += num.textContent;
+      if (operation.secondOperand === '0') {
+        operation.secondOperand = newNum;
+      } else {
+        operation.secondOperand += newNum;
+      }
     }
 
-    console.log(operate(operation))
+    console.log({ operation })
     displayResult(operate(operation));
   });
 });
