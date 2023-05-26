@@ -1,5 +1,7 @@
+const INITIAL_VALUE = '0';
+
 const operation = {
-  firstOperand: '0',
+  firstOperand: INITIAL_VALUE,
   operator: null,
   secondOperand: null,
 }
@@ -29,7 +31,7 @@ function operate(operation) {
   const { firstOperand, operator, setcondOperand } = operation;
 
 
-  if (!operator || !secondOperator) {
+  if (!operator || secondOperator === null) {
     return firstOperand;
   }
 
@@ -61,6 +63,10 @@ function displayResult(operationResult) {
 
 displayResult(operation.firstOperand);
 
+function updateCalculatorDisplay() {
+  displayResult(operate(operation));
+}
+
 
 numberElements.forEach(num => {
   num.addEventListener('click', () => {
@@ -81,9 +87,29 @@ numberElements.forEach(num => {
       }
     }
 
-    console.log({ operation })
-    displayResult(operate(operation));
+    updateCalculatorDisplay();
   });
+});
+
+floatElement.addEventListener('click', () => {
+  const { firstOperand, operator, secondOperand } = operation;
+
+  if (operator && !secondOperand) {
+    return;
+  }
+
+  if (firstOperand && !operator && !firstOperand.includes('.')) {
+    operation.firstOperand += '.';
+    updateCalculatorDisplay();
+    return;
+  }
+
+  if (secondOperand && !secondOperand.includes('.')) {
+    operation.secondOperand += '.';
+    updateCalculatorDisplay();
+    return;
+  }
+
 });
 
 operatorsElements.forEach(operator => {
