@@ -150,3 +150,7 @@ h1 {
 .float {
     background-color: oklch(0.48 0.16 271.41);
 }
+
+.clear {
+    background-color: oklch(0.64 0.22 28.81);
+}

@@ -10,6 +10,7 @@ const calculatorDisplayElement = document.querySelector("#calculator-display");
 const numberElements = document.querySelectorAll(".num");
 const operatorsElements = document.querySelectorAll('.operator');
 const floatElement = document.querySelector('.float');
+const clearElement = document.querySelector('.clear');
 
 function add(firstOperand, secondOperator) {
   return firstOperand + secondOperator;
@@ -57,6 +58,12 @@ function operate(operation) {
   }
 }
 
+function resetOperation() {
+  operation.firstOperand = INITIAL_VALUE;
+  operation.operator = null;
+  operation.secondOperand = null;
+}
+
 function displayResult(operationResult) {
   calculatorDisplayElement.textContent = operationResult;
 }
@@ -66,6 +73,11 @@ displayResult(operation.firstOperand);
 function updateCalculatorDisplay() {
   displayResult(operate(operation));
 }
+
+clearElement.addEventListener('click', () => {
+  resetOperation();
+  updateCalculatorDisplay();
+})
 
 
 numberElements.forEach(num => {
