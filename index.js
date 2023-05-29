@@ -12,45 +12,29 @@ const operatorsElements = document.querySelectorAll('.operator');
 const floatElement = document.querySelector('.float');
 const clearElement = document.querySelector('.clear');
 
-function add(firstOperand, secondOperator) {
-  return firstOperand + secondOperator;
-}
-
-function substract(firstOperand, secondOperator) {
-  return firstOperand - secondOperator;
-}
-
-function multiply(firstOperand, secondOperator) {
-  return firstOperand * secondOperator;
-}
-
-function divide(firstOperand, secondOperator) {
-  return firstOperand / secondOperator;
-}
-
 function operate(operation) {
-  const { firstOperand, operator, setcondOperand } = operation;
+  const { firstOperand, operator, secondOperand } = operation;
 
 
-  if (!operator || secondOperator === null) {
+  if (!operator || secondOperand === null) {
     return firstOperand;
   }
 
   const parsedFirstOperand = Number.parseFloat(firstOperand);
-  const parseSecondOperand = Number.parseFloat(setcondOperand);
+  const parseSecondOperand = Number.parseFloat(secondOperand);
 
   switch (operator) {
     case '+': {
-      return add(parsedFirstOperand, parseSecondOperand);
+      return parsedFirstOperand + parseSecondOperand;
     }
     case '-': {
-      return substract(parsedFirstOperand, parseSecondOperand);
+      return parsedFirstOperand - parseSecondOperand;
     }
     case '×': {
-      return multiply(parsedFirstOperand, parseSecondOperand);
+      return parsedFirstOperand * parseSecondOperand;
     }
     case '÷': {
-      return divide(parsedFirstOperand, parseSecondOperand);
+      return parsedFirstOperand / parseSecondOperand;
     }
     default: {
       throw new Error(`Unrecognized operator: ${operator}`);
@@ -71,7 +55,12 @@ function displayResult(operationResult) {
 displayResult(operation.firstOperand);
 
 function updateCalculatorDisplay() {
-  displayResult(operate(operation));
+  const result = operate(operation);
+
+  displayResult(result);
+
+  console.log({ operation });
+  return result;
 }
 
 clearElement.addEventListener('click', () => {
@@ -84,22 +73,22 @@ numberElements.forEach(num => {
   num.addEventListener('click', () => {
     const newNum = num.textContent;
 
-    if (!operation.secondOperand) {
+    if (!operation.secondOperand && !operation.operator) {
 
       if (operation.firstOperand === '0') {
         operation.firstOperand = newNum;
       } else {
         operation.firstOperand += newNum;
       }
+      displayResult(operation.firstOperand);
     } else {
-      if (operation.secondOperand === '0') {
+      if (!operation.secondOperand) {
         operation.secondOperand = newNum;
       } else {
         operation.secondOperand += newNum;
       }
+      displayResult(operation.secondOperand);
     }
-
-    updateCalculatorDisplay();
   });
 });
 
@@ -126,19 +115,15 @@ floatElement.addEventListener('click', () => {
 
 operatorsElements.forEach(operator => {
   operator.addEventListener('click', () => {
-    const lastElementIndex = result.length - 1;
 
-    if (lastElementIndex < 0) {
-      return;
-    }
-
-    const operatorToAdd = { operator: operator.textContent };
-
-    if (result[lastElementIndex]?.operator) {
-      result[lastElementIndex] = operatorToAdd;
+    if (operation.secondOperand) {
+      operation.operator = operator.textContent;
+      const newFirstOperand = updateCalculatorDisplay();
+      operation.firstOperand = newFirstOperand;
+      operation.operator = null;
+      operation.secondOperand = null;
     } else {
-      result.push(operatorToAdd);
+      operation.operator = operator.textContent;
     }
-    displayResult();
   });
 });
