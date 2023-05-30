@@ -59,7 +59,6 @@ function updateCalculatorDisplay() {
 
   displayResult(result);
 
-  console.log({ operation });
   return result;
 }
 
@@ -120,7 +119,7 @@ operatorsElements.forEach(operator => {
       operation.operator = operator.textContent;
       const newFirstOperand = updateCalculatorDisplay();
       operation.firstOperand = newFirstOperand;
-      operation.operator = null;
+      // operation.operator = null;
       operation.secondOperand = null;
     } else {
       operation.operator = operator.textContent;
