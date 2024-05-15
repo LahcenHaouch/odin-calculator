@@ -34,6 +34,9 @@ function operate(operation) {
       return parsedFirstOperand * parseSecondOperand;
     }
     case "÷": {
+      if (parseSecondOperand === 0) {
+        throw new Error("no no no ;)");
+      }
       return parsedFirstOperand / parseSecondOperand;
     }
     default: {
@@ -46,8 +49,6 @@ function resetOperation() {
   operation.firstOperand = INITIAL_VALUE;
   operation.operator = null;
   operation.secondOperand = null;
-
-  displayResult(operation.firstOperand);
 }
 
 function displayResult(operationResult) {
@@ -57,14 +58,22 @@ function displayResult(operationResult) {
 displayResult(operation.firstOperand);
 
 function calculateAndDisplay() {
-  operation.firstOperand = operate(operation);
-  operation.operator = null;
-  operation.secondOperand = null;
+  try {
+    operation.firstOperand = operate(operation);
+    operation.operator = null;
+    operation.secondOperand = null;
 
-  displayResult(operation.firstOperand);
+    displayResult(operation.firstOperand);
+  } catch (error) {
+    displayResult(error.message);
+    resetOperation();
+  }
 }
 
-clearElement.addEventListener("click", () => resetOperation());
+clearElement.addEventListener("click", () => {
+  resetOperation();
+  displayResult(operation.firstOperand);
+});
 
 numberElements.forEach((num) => {
   num.addEventListener("click", () => {
