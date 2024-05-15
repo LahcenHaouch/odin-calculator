@@ -28,27 +28,32 @@ function operate(operation) {
   switch (operator) {
     case "+": {
       result = parsedFirstOperand + parseSecondOperand;
-      return result.toFixed(3);
+      break;
     }
     case "-": {
       result = parsedFirstOperand - parseSecondOperand;
-      return result.toFixed(3);
+      break;
     }
     case "×": {
       result = parsedFirstOperand * parseSecondOperand;
-      return result.toFixed(3);
+      break;
     }
     case "÷": {
       if (parseSecondOperand === 0) {
         throw new Error("no no no ;)");
       }
       result = parsedFirstOperand / parseSecondOperand;
-      return result.toFixed(3);
+      break;
     }
     default: {
       throw new Error(`Unrecognized operator: ${operator}`);
     }
   }
+
+  if (result % 1 !== 0) {
+    return result.toFixed(3);
+  }
+  return result;
 }
 
 function resetOperation() {
