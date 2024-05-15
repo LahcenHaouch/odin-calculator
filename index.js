@@ -23,21 +23,27 @@ function operate(operation) {
   const parsedFirstOperand = Number.parseFloat(firstOperand);
   const parseSecondOperand = Number.parseFloat(secondOperand);
 
+  let result = null;
+
   switch (operator) {
     case "+": {
-      return parsedFirstOperand + parseSecondOperand;
+      result = parsedFirstOperand + parseSecondOperand;
+      return result.toFixed(3);
     }
     case "-": {
-      return parsedFirstOperand - parseSecondOperand;
+      result = parsedFirstOperand - parseSecondOperand;
+      return result.toFixed(3);
     }
     case "×": {
-      return parsedFirstOperand * parseSecondOperand;
+      result = parsedFirstOperand * parseSecondOperand;
+      return result.toFixed(3);
     }
     case "÷": {
       if (parseSecondOperand === 0) {
         throw new Error("no no no ;)");
       }
-      return parsedFirstOperand / parseSecondOperand;
+      result = parsedFirstOperand / parseSecondOperand;
+      return result.toFixed(3);
     }
     default: {
       throw new Error(`Unrecognized operator: ${operator}`);
