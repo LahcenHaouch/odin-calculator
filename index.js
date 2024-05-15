@@ -1,20 +1,20 @@
-const INITIAL_VALUE = '0';
+const INITIAL_VALUE = "0";
 
 const operation = {
   firstOperand: INITIAL_VALUE,
   operator: null,
   secondOperand: null,
-}
+};
 
 const calculatorDisplayElement = document.querySelector("#calculator-display");
 const numberElements = document.querySelectorAll(".num");
-const operatorsElements = document.querySelectorAll('.operator');
-const floatElement = document.querySelector('.float');
-const clearElement = document.querySelector('.clear');
+const operatorsElements = document.querySelectorAll(".operator");
+const floatElement = document.querySelector(".float");
+const equalElement = document.querySelector(".equal");
+const clearElement = document.querySelector(".clear");
 
 function operate(operation) {
   const { firstOperand, operator, secondOperand } = operation;
-
 
   if (!operator || secondOperand === null) {
     return firstOperand;
@@ -24,16 +24,16 @@ function operate(operation) {
   const parseSecondOperand = Number.parseFloat(secondOperand);
 
   switch (operator) {
-    case '+': {
+    case "+": {
       return parsedFirstOperand + parseSecondOperand;
     }
-    case '-': {
+    case "-": {
       return parsedFirstOperand - parseSecondOperand;
     }
-    case '×': {
+    case "×": {
       return parsedFirstOperand * parseSecondOperand;
     }
-    case '÷': {
+    case "÷": {
       return parsedFirstOperand / parseSecondOperand;
     }
     default: {
@@ -46,6 +46,8 @@ function resetOperation() {
   operation.firstOperand = INITIAL_VALUE;
   operation.operator = null;
   operation.secondOperand = null;
+
+  displayResult(operation.firstOperand);
 }
 
 function displayResult(operationResult) {
@@ -54,75 +56,76 @@ function displayResult(operationResult) {
 
 displayResult(operation.firstOperand);
 
-function updateCalculatorDisplay() {
-  const result = operate(operation);
+function calculateAndDisplay() {
+  operation.firstOperand = operate(operation);
+  operation.operator = null;
+  operation.secondOperand = null;
 
-  displayResult(result);
-
-  return result;
+  displayResult(operation.firstOperand);
 }
 
-clearElement.addEventListener('click', () => {
-  resetOperation();
-  updateCalculatorDisplay();
-})
+clearElement.addEventListener("click", () => resetOperation());
 
-
-numberElements.forEach(num => {
-  num.addEventListener('click', () => {
+numberElements.forEach((num) => {
+  num.addEventListener("click", () => {
     const newNum = num.textContent;
 
-    if (!operation.secondOperand && !operation.operator) {
-
-      if (operation.firstOperand === '0') {
-        operation.firstOperand = newNum;
+    if (operation.secondOperand === null) {
+      if (!operation.operator) {
+        if (operation.firstOperand === INITIAL_VALUE) {
+          operation.firstOperand = newNum;
+        } else {
+          operation.firstOperand += newNum;
+        }
+        displayResult(operation.firstOperand);
       } else {
-        operation.firstOperand += newNum;
-      }
-      displayResult(operation.firstOperand);
-    } else {
-      if (!operation.secondOperand) {
         operation.secondOperand = newNum;
-      } else {
-        operation.secondOperand += newNum;
+        displayResult(operation.secondOperand);
       }
+    } else {
+      operation.secondOperand += newNum;
       displayResult(operation.secondOperand);
     }
   });
 });
 
-floatElement.addEventListener('click', () => {
+operatorsElements.forEach((operator) => {
+  operator.addEventListener("click", () => {
+    if (operation.secondOperand === null) {
+      operation.operator = operator.textContent;
+      return;
+    } else {
+      calculateAndDisplay();
+      operation.operator = operator.textContent;
+    }
+  });
+});
+
+floatElement.addEventListener("click", () => {
   const { firstOperand, operator, secondOperand } = operation;
 
   if (operator && !secondOperand) {
     return;
   }
 
-  if (firstOperand && !operator && !firstOperand.includes('.')) {
-    operation.firstOperand += '.';
-    updateCalculatorDisplay();
+  if (firstOperand && !operator && !firstOperand.includes(".")) {
+    operation.firstOperand += ".";
+    displayResult(operation.firstOperand);
     return;
   }
 
-  if (secondOperand && !secondOperand.includes('.')) {
-    operation.secondOperand += '.';
-    updateCalculatorDisplay();
-    return;
+  if (secondOperand && !secondOperand.includes(".")) {
+    operation.secondOperand += ".";
+    displayResult(operation.secondOperand);
   }
-
 });
 
-operatorsElements.forEach(operator => {
-  operator.addEventListener('click', () => {
+equalElement.addEventListener("click", () => {
+  const { operator, secondOperand } = operation;
 
-    if (operation.secondOperand) {
-      operation.operator = operator.textContent;
-      const newFirstOperand = updateCalculatorDisplay();
-      operation.firstOperand = newFirstOperand;
-      // operation.operator = null;
-      operation.secondOperand = null;
-    } else {
-      operation.operator = operator.textContent;
-    }
-  });
+  if (!secondOperand || !operator) {
+    return;
+  }
+
+  calculateAndDisplay();
 });

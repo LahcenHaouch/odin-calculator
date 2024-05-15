@@ -107,8 +107,7 @@ h1 {
     padding: 16px;
     border: solid;
     border-color: #3a3a3c;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
+    border-radius: 8px;
 }
 
 #calculator-display {
